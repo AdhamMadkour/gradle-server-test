@@ -5,23 +5,18 @@ package gradle.server.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
     @Test
     void clientSend() {
-
-    }
-
-    void serverReply() {
-
-    }
-
-    void clientRec() {
-
-    }
-
-    void serverRec() {
-
+        assertAll(
+                () -> assertTrue(Testwork.testOpenPort("localhost", 8833)),
+                () -> assertTrue(Testwork.testSend("hello world")),
+                () -> assertTrue(Testwork.testReply("finally done")),
+                () -> assertTrue(Testwork.addNewClient("localhost", 8833))
+        );
     }
 }
